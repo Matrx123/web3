@@ -4,7 +4,7 @@ We're using [Crypto Zombies](https://cryptozombies.io/) as the learning platform
 
 ## Part 0: Solidity smart contracts
 
-here we are practicing to build smart contracts and learing solidity basics
+here we are practicing to build smart contracts and learing solidity basics, at first we will go through some solidity basics and than move on to building a fullstack application integrated with solidity smart contract.
 
 ## Part 1: Solidity Basics
 
