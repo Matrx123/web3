@@ -2,6 +2,10 @@ This folder contains the code for the first part of the complete solidity roadma
 In this series, we will be building a simple smart contract that allows us to store a string on the blockchain.
 We're using [Crypto Zombies](https://cryptozombies.io/) as the learning platform and completing the Solidity basics series.
 
+## Part 0: Solidity smart contracts
+
+here we are practicing to build smart contracts and learing solidity basics
+
 ## Part 1: Solidity Basics
 
 Here we go through [Module 1](https://cryptozombies.io/en/lesson/1/chapter/1) of the Crypto zombies course
