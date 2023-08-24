@@ -5,6 +5,7 @@ We're using [Crypto Zombies](https://cryptozombies.io/) as the learning platform
 ## Part 0: Solidity smart contracts
 
 here we are practicing to build smart contracts and learing solidity basics, at first we will go through some solidity basics and than move on to building a fullstack application integrated with solidity smart contract.
+We have created a new folder in which we will learn how to deploy the contract to the blockchain, we will learn how to compile the contract to get the binaries and use this command to compile ``` yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . SimpleContract.sol ``` 
 
 ## Part 1: Solidity Basics
 
