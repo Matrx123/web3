@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "ethers": "^6.7.1",
+    "solc": "0.8.8"
+  },
+  "scripts": {
+    "compile": "yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . SimpleContract.sol"
+  }
+}
