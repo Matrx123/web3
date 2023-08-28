@@ -9,6 +9,7 @@ We have created a new folder in which we will learn how to deploy the contract t
 use of ```ethers``` and ```ganache``` for local development.
 learned about ganache and deployed a contract in ganache local dev blockchain.
 added environment variables for rpc urls and private keys.
+verified and publish code after deploying the contract to sepolia test net from vscode and with the help of alchamy.
 
 ## Part 1: Solidity Basics
 
