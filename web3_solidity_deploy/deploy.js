@@ -6,7 +6,7 @@ async function main() {
   //HTTP://127.0.0.1:7545
   const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
   //creating a wallet with the private key from ganache
-  const wallet = new ethers.Wallet(`0x${process.env.PVT_KEY}`, provider);
+  const wallet = new ethers.Wallet(process.env.PVT_KEY, provider);
   //fetch abi
   const abi = fs.readFileSync(
     "./SimpleContract_sol_SimpleContract.abi",
@@ -20,12 +20,15 @@ async function main() {
   const contractFactory = new ethers.ContractFactory(abi, binary, wallet);
   console.log("Deploying, please wait....");
   const contract = await contractFactory.deploy();
+  //wait for 1 block
+  await contract.deploymentTransaction().wait(1);
   //use the methods in the contracts
   //get favourite
   const favNo = await contract.retrieve();
   console.log("current favourite no >>>", favNo.toString());
   //set favourite
   const txResponse = await contract.store("7");
+  //wait for 1 block
   await txResponse.wait(1);
   const updatedFavNo = await contract.retrieve();
   console.log("updated favourite no >>>", updatedFavNo.toString());
