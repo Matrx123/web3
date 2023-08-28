@@ -6,7 +6,7 @@ async function main() {
   const provider = new ethers.JsonRpcProvider("http://127.0.0.1:7545");
   //creating a wallet with the private key from ganache
   const wallet = new ethers.Wallet(
-    "private key of your ganache ethereum blockchain",
+    "0x49988d1e57636550d841b8297bdbfa3bac2b7a2fba38111defa57ec2adc74e73",
     provider
   );
   //fetch abi
@@ -23,8 +23,14 @@ async function main() {
   console.log("Deploying, please wait....");
   const contract = await contractFactory.deploy();
   //use the methods in the contracts
+  //get favourite
   const favNo = await contract.retrieve();
-  console.log("favourite no >>>", favNo.toString());
+  console.log("current favourite no >>>", favNo.toString());
+  //set favourite
+  const txResponse = await contract.store("7");
+  await txResponse.wait(1);
+  const updatedFavNo = await contract.retrieve();
+  console.log("updated favourite no >>>", updatedFavNo.toString());
 }
 
 main()
@@ -33,4 +39,3 @@ main()
     console.log("Error >>>", error);
     process.exit(1);
   });
-
