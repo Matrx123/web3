@@ -8,6 +8,7 @@ here we are practicing to build smart contracts and learing solidity basics, at 
 We have created a new folder in which we will learn how to deploy the contract to the blockchain, we will learn how to compile the contract to get the binaries and use this command to compile ``` yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . SimpleContract.sol ``` 
 use of ```ethers``` and ```ganache``` for local development.
 learned about ganache and deployed a contract in ganache local dev blockchain.
+added environment variables for rpc urls and private keys.
 
 ## Part 1: Solidity Basics
 
