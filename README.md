@@ -11,6 +11,7 @@ learned about ganache and deployed a contract in ganache local dev blockchain.
 added environment variables for rpc urls and private keys.
 verified and publish code after deploying the contract to sepolia test net from vscode and with the help of alchamy.
 We are using hardhat for boilerplate and connection with hardhat's ethers module and replacing ganache.
+Added the testing liberary Mocha and installed gas-reporter and solidity coverage for good dev experience and avoid security flaws in a smart contract.
 
 ## Part 1: Solidity Basics
 
