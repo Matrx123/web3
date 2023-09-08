@@ -1,10 +1,9 @@
 require("@nomicfoundation/hardhat-toolbox")
 require("@nomicfoundation/hardhat-verify")
 require("dotenv").config()
-require("./tasks/block-number")
 require("hardhat-gas-reporter")
 require("solidity-coverage")
-
+require("hardhat-deploy")
 /** @type import('hardhat/config').HardhatUserConfig */
 
 const RPC_URL = process.env.RPC_URL
