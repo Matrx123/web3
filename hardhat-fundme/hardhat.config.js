@@ -23,6 +23,11 @@ module.exports = {
             chainId: 31337,
         },
     },
+    namedAccounts: {
+        deployer: {
+            default: 0, // here this will by default take the first account as deployer
+        },
+    },
     etherscan: {
         apiKey: ETH_SCN_KEY,
     },
@@ -36,7 +41,7 @@ module.exports = {
     solidity: {
         compilers: [
             {
-                version: "0.8.7",
+                version: "0.8.8",
             },
             {
                 version: "0.6.6",
