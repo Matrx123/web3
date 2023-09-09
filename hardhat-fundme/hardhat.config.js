@@ -33,5 +33,14 @@ module.exports = {
         currency: "USD",
         coinmarketcap: COINMARKETCAP_API_KEY,
     },
-    solidity: "0.8.8",
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.7",
+            },
+            {
+                version: "0.6.6",
+            },
+        ],
+    },
 }
