@@ -49,7 +49,7 @@ contract FundMe {
         addressToAmount[msg.sender] = msg.value;
     }
 
-    function withdraw() public {
+    function withdraw() public payable onlyOwner {
         for (uint256 i = 0; i < funders.length; i++) {
             addressToAmount[funders[i]] = 0;
         }
@@ -65,6 +65,6 @@ contract FundMe {
         (bool callSuccess, ) = payable(msg.sender).call{
             value: address(this).balance
         }("");
-        require(callSuccess, "Call Failed");
+        require(callSuccess, "Transfer Failed");
     }
 }
