@@ -4,6 +4,7 @@ require("dotenv").config()
 require("hardhat-gas-reporter")
 require("solidity-coverage")
 require("hardhat-deploy")
+require("@nomiclabs/hardhat-ethers")
 /** @type import('hardhat/config').HardhatUserConfig */
 
 const RPC_URL = process.env.RPC_URL
