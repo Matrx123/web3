@@ -58,7 +58,6 @@ describe("FundMe", function () {
                 )
                 const finalDeployerBalance =
                     await ethers.provider.getBalance(deployer)
-                const gasCost = txn
                 assert.equal(finalFundMeBalance, 0)
                 assert.equal(
                     initialFundMeBalance.add(initialDeployerBalance).toString(),
