@@ -1,38 +1,63 @@
-const { network, run } = require("hardhat")
-const { networkConfig, developmentChain } = require("../helper-hardhat-config")
-const { verify } = require("../utils/verify")
+// SPDX-License-Identifier: MIT
 
-module.exports = async ({ getNamedAccounts, deployments }) => {
-    const { deploy, log } = deployments
-    const { deployer } = await getNamedAccounts()
-    const chainId = network.config.chainId
+pragma solidity ^0.8.8;
 
-    let ethUsdPriceFeedAddress
-    if (developmentChain.includes(network.name)) {
-        const ethUsdAggregator = await deployments.get("MockV3Aggregator")
-        ethUsdPriceFeedAddress = ethUsdAggregator.address
-    } else {
-        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+import "./PriceConverter.sol";
+
+//error codes
+error FundMe__NotOwner();
+
+/**
+ * @title FundMe contract
+ * @author Vipin Joshi
+ * @notice This is a simple contract to test the fund transfer
+ */
+contract FundMe {
+    using PriceConverter for uint256;
+
+    uint256 public minimumUsd = 50 * 1e18;
+
+    address[] public funders;
+    mapping(address => uint256) public addressToAmount;
+    //aggregator address variable
+    AggregatorV3Interface public priceFeed;
+    address public owner;
+
+    modifier onlyOwner() {
+        if (msg.sender != owner) revert FundMe__NotOwner();
+        _;
     }
 
-    //make mocks when develop locally
-    log("Deploying FundME ......")
-    const fundMeTxn = await deploy("FundMe", {
-        from: deployer,
-        args: [ethUsdPriceFeedAddress],
-        logs: true,
-        waitConfirmations: network.config.blockConfirmations || 1,
-    })
-    log("FundMe Deployed on Address: ", fundMeTxn?.address)
-    log("----------------------------------------------")
-    if (
-        !developmentChain.includes(network.name) &&
-        process.env.ETH_SCN_API_KEY
-    ) {
-        //verify code
-        verify(fundMeTxn?.address, [ethUsdPriceFeedAddress])
+    constructor(address priceFeedAddress) {
+        owner = msg.sender;
+        priceFeed = AggregatorV3Interface(priceFeedAddress);
     }
-    log("----------------------------------------------")
+
+    function fund() public payable {
+        require(
+            msg.value.getConversionRate(priceFeed) >= minimumUsd,
+            "Didn't send enough!"
+        );
+        funders.push(msg.sender);
+        addressToAmount[msg.sender] = msg.value;
+    }
+
+    function withdraw() public {
+        // for (uint256 i = 0; i < funders.length; i++) {
+        //     addressToAmount[funders[i]] = 0;
+        // }
+        // //reset the array
+        // funders = new address[](0);
+        // //withdraw
+        // //transfer
+        // payable(msg.sender).transfer(address(this).balance);
+        // //send
+        // (bool sendSuccess, ) = payable(msg.sender).send(address(this).balance);
+        // require(sendSuccess, "Send Failed");
+        // //call
+        // (bool callSuccess, ) = payable(msg.sender).call{
+        //     value: address(this).balance
+        // };
+        // require(callSuccess, "Call Failed");
+    }
 }
-
-module.exports.tags = ["all", "fundme"]
