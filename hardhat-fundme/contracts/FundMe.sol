@@ -15,11 +15,11 @@ error FundMe__NotOwner();
 contract FundMe {
     using PriceConverter for uint256;
 
-    address[] public s_funders;
-    mapping(address => uint256) public s_addressToAmount;
+    address[] private s_funders;
+    mapping(address => uint256) private s_addressToAmount;
     //aggregator address variable
-    AggregatorV3Interface public s_priceFeed;
-    address public immutable i_owner;
+    AggregatorV3Interface private s_priceFeed;
+    address private immutable i_owner;
 
     /**
      * Only owner modifier to check if owner else throw error
@@ -77,5 +77,23 @@ contract FundMe {
             value: address(this).balance
         }("");
         require(success, "Cheap Transfer failed");
+    }
+
+    function getOwner() public view returns (address) {
+        return i_owner;
+    }
+
+    function getFunder(uint256 _index) public view returns (address) {
+        return s_funders[_index];
+    }
+
+    function getAddressToAmountMapping(
+        address _funder
+    ) public view returns (uint256) {
+        return s_addressToAmount[_funder];
+    }
+
+    function getPriceFeed() public view returns (AggregatorV3Interface) {
+        return s_priceFeed;
     }
 }
