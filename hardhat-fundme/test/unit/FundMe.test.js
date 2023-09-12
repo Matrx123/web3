@@ -49,20 +49,28 @@ describe("FundMe", function () {
                 )
                 const initialDeployerBalance =
                     await ethers.provider.getBalance(deployer)
+
                 //withdraw balance from single account list
                 const txn = await fundMe.withdraw()
-                await txn.wait(1)
+                const txn_receipt = await txn.wait(1)
                 //final balances
                 const finalFundMeBalance = await ethers.provider.getBalance(
                     fundMe.target,
                 )
                 const finalDeployerBalance =
                     await ethers.provider.getBalance(deployer)
+
+                const total_gasPrice =
+                    txn_receipt.gasUsed * txn_receipt.gasPrice
+
                 assert.equal(finalFundMeBalance, 0)
                 assert.equal(
-                    initialFundMeBalance.add(initialDeployerBalance).toString(),
-                    finalDeployerBalance.add(txn.gasPrice).toString(),
+                    (initialFundMeBalance + initialDeployerBalance).toString(),
+                    (finalDeployerBalance + total_gasPrice).toString(),
                 )
+            })
+            it("Withdraw from multiple accounts type list", async function () {
+                const accounts = await ethers.getSigners()
             })
         })
     })
