@@ -17,7 +17,7 @@ describe("FundMe", function () {
     })
     describe("constructor", () => {
         it("sets the aggregator address correctly", async function () {
-            const response = await fundMe.s_priceFeed()
+            const response = await fundMe.getPriceFeed()
             assert.equal(response, mockV3Aggregator.target)
         })
     })
@@ -30,12 +30,12 @@ describe("FundMe", function () {
         })
         it("updated the amount funded data structure", async function () {
             await fundMe.fund({ value: sendValue })
-            const response = await fundMe.s_addressToAmount(deployer)
+            const response = await fundMe.getAddressToAmountMapping(deployer)
             assert.equal(response.toString(), sendValue.toString())
         })
         it("Adds funder to array of s_funders", async function () {
             await fundMe.fund({ value: sendValue })
-            const funder = await fundMe.s_funders(0)
+            const funder = await fundMe.getFunder(0)
             assert.equal(funder, deployer)
         })
         describe("withdraw", function () {
@@ -98,10 +98,12 @@ describe("FundMe", function () {
                     (finalDeployerBalance + total_gas).toString(),
                 )
                 //make sure s_funders is properly set
-                await expect(fundMe.s_funders(0)).to.be.reverted
+                await expect(fundMe.getFunder(0)).to.be.reverted
                 for (let i = 1; i < accounts.length; i++) {
                     assert.equal(
-                        await fundMe.s_addressToAmount(accounts[i].address),
+                        await fundMe.getAddressToAmountMapping(
+                            accounts[i].address,
+                        ),
                         0,
                     )
                 }
@@ -145,10 +147,12 @@ describe("FundMe", function () {
                     (finalDeployerBalance + total_gas).toString(),
                 )
                 //make sure s_funders is properly set
-                await expect(fundMe.s_funders(0)).to.be.reverted
+                await expect(fundMe.getFunder(0)).to.be.reverted
                 for (let i = 1; i < accounts.length; i++) {
                     assert.equal(
-                        await fundMe.s_addressToAmount(accounts[i].address),
+                        await fundMe.getAddressToAmountMapping(
+                            accounts[i].address,
+                        ),
                         0,
                     )
                 }
