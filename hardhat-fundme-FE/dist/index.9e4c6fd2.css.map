@@ -1,0 +1,1 @@
+{"mappings":"AAAA;;;;AAGA;;;;AAGA;;;;;AAIA","sources":["index.css"],"sourcesContent":[".buttons-container {\n    padding: 1;\n}\n.buttons-container > button {\n    margin-left: 5;\n}\n.user-input{\n    padding: 5;\n    margin-top: 10;\n}\n.user-input > button {\n    margin-left: 5;\n}"],"names":[],"version":3,"file":"index.9e4c6fd2.css.map","sourceRoot":"/__parcel_source_root/"}
