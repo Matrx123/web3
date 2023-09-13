@@ -37,4 +37,3 @@ Here we build our own Solidity contract to accept payments from a user. The proj
 - A simple contract that accepts payments. It emits events anytime a user makes a payment
 - A frontend where a user can go, connect their wallet and make a payment. Once the payment is made, the user is given access to the course
 - A centralized backend that watches the contract, and anytime a payment is made, it gives the user access to the course
-- There is a problem with our backend, it can go down, and when it does it might miss events from the contract. Can you think of a way to fix this?
